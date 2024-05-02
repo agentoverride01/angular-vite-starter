@@ -1,0 +1,75 @@
+:host {
+  font-family: var(--font-family);
+
+  .profile-card {
+    --card-radius: 0;
+    --card-grid-rows: auto;
+    --card-min-height: auto;
+    --card-width: var(--profile-card-width, fit-content);
+    
+    bofa-content {
+      --content-padding: 18.5px 10px 18.5px;
+      --content-grid-rows: auto;
+      --content-section-grid-columns: auto auto 1fr;
+      --content-section-column-gap: 10px;
+    }
+         
+    &--checkbox, &--info, &--contacts {
+      display: grid;
+    }
+
+    &--checkbox {
+      span {
+        display: grid;
+        align-items: center;
+      }
+    }
+
+    &--info {
+      > label {
+        &[for=name] {
+          font-size: 16px;
+          color: var(--profile-card-name-color);
+        }
+
+        &[for=title] {
+          font-size: 14px;
+          color: var(--profile-card-title-color);
+        }
+
+        &[for=email] {
+          font-size: 14px;
+          padding-bottom: 6px;
+  
+          a {
+            color: var(--profile-card-email-color, #009CDE);
+            &:link, &:visited, &:hover, &:active {
+              text-decoration: none;
+            } 
+          }
+        }
+      }
+    }
+
+    &--contacts {
+      grid-template-columns: 1fr 1fr;
+
+      label {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        row-gap: 10px;
+        font-size: 13px;
+
+        span {
+          &:first-child {
+            color: var(--profile-card-contact-title-color);
+          }
+
+          &:last-child {
+            color: var(--profile-card-contact-color);
+          }
+        }
+      }
+    }
+  }
+}

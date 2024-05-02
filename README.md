@@ -1,2 +1,2 @@
-# angular-vite-starter
-Angular 17.x + Vite + Storybook Starter
+# angular-vite-storybook
+Angular 17.x + Vite + Storybook 18.x

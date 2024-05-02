@@ -1,0 +1,9 @@
+{
+  "extends": "./packages/tools/tsconfig.spec.json",
+  "include": [
+    "./packages/components/**/*.test.ts",
+    "./packages/components/**/*.spec.ts",
+    "./src/**/*.spec.ts",
+    "./src/**/*.test.ts"
+  ]
+}

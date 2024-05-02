@@ -1,0 +1,25 @@
+{
+  "compileOnSave": false,
+  "extends": "./packages/tools/tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@zeke/theme": [ "./packages/theme/styles.scss" ],
+      "@zeke/tools": [ "./packages/tools/src/tools.ts" ],
+      "@zeke/storybook-utils": [ 
+        "./packages/storybook/src/utils.ts"
+      ],
+      "@bofa/avatar": [ 
+        "./packages/components/src/avatar/avatar.component.ts" 
+      ],
+      "@bofa/card": [ 
+        "./packages/components/src/card/card.component.ts" 
+      ],
+      "@bofa/layout": [ 
+        "./packages/components/src/layout/layout.component.ts" 
+      ],
+      "@bofa/content": [ 
+        "./packages/components/src/content/content.component.ts" 
+      ]
+    }
+  }
+}
