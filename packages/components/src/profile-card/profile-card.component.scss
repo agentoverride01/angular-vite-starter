@@ -5,24 +5,25 @@
     --card-radius: 0;
     --card-grid-rows: auto;
     --card-min-height: auto;
+    --card-border: none;
     --card-width: var(--profile-card-width, fit-content);
     
     bofa-content {
-      --content-padding: 18.5px 10px 18.5px;
       --content-grid-rows: auto;
-      --content-section-grid-columns: auto auto 1fr;
-      --content-section-column-gap: 10px;
-    }
-         
-    &--checkbox, &--info, &--contacts {
-      display: grid;
+      --content-section-grid-columns: auto 1fr;
+      --content-section-align-items: center;
     }
 
-    &--checkbox {
-      span {
-        display: grid;
-        align-items: center;
-      }
+    &--right {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      column-gap: 20px;
+      padding: 18.5px 0;
+      border-bottom: 1px solid #2e2e31;
+    }
+         
+    &--info, &--contacts {
+      display: grid;
     }
 
     &--info {

@@ -1,20 +1,29 @@
 /// <reference types="vitest" />
 
 import { defineConfig } from 'vite'
-import { join } from 'node:path'
+import path, { join, resolve } from 'node:path'
 
 import angular from '@analogjs/vite-plugin-angular'
-import { viteTsPaths } from './utils'
 
 export default defineConfig(({ mode }) => ({
   resolve: {
-    alias: viteTsPaths()
+    mainFields: ['module']
   },
   plugins: [
     angular({
       tsconfig: join(process.cwd(), 'tsconfig.spec.json'),
       inlineStylesExtension: 'scss'
-    })
+    }),
+    {
+      name: '@storybook/angular',
+      transform(code) {
+        if (code.includes(`'@bofa/components/content'`)) {
+          const PATH = join(process.cwd(), 'packages/components/src/content/index.ts')
+          return code.replace(/\'@bofa\/components\/content\'/g, `\"${PATH}\"`);
+        }
+        return;
+      }
+    }
   ],            
   test: {
     globals: true,

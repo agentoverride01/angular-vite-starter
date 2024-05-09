@@ -1,14 +1,17 @@
+import type { ProfileCardValue } from './types'
+
 import { TestBed } from '@angular/core/testing'
-import { Component } from '@angular/core'
+import { Component, NgModule } from '@angular/core'
 import { By } from '@angular/platform-browser'
 
-import { BofaProfileCardComponent, ProfileCardValue } from './profile-card.component'
+import { BofaProfileCardComponent } from './profile-card.component'
+import { BofaProfileCardModule } from './profile-card.module'
 
 describe('ProfileCard', () => {
 
   beforeAll(async () => {
     await TestBed.configureTestingModule({
-      imports: [ BofaProfileCardComponent ],
+      imports: [ BofaProfileCardModule ],
     }).compileComponents()
   })
 
@@ -18,9 +21,12 @@ describe('ProfileCard', () => {
     expect(app).toBeTruthy()
   })
 
-  it('should bind the input value', () => {
+
+  it('should bind the input value', async () => {
     const value: ProfileCardValue = {
-      imgSrc: 'https://2019.ng-my.org/assets/imgs/speakers/arjay-elbore.webp',
+      photo: {
+        src: 'https://2019.ng-my.org/assets/imgs/speakers/arjay-elbore.webp'
+      },
       name: 'Jane Doe',
       title: 'Software Engineer',
       email: 'jane.doe@bofa.com',
@@ -28,16 +34,26 @@ describe('ProfileCard', () => {
     }
 
     @Component({
-      standalone: true,
-      template: `<bofa-profile-card [value]="value" />`,
-      imports: [ BofaProfileCardComponent ]
+      template: `<bofa-profile-card [value]="value"></bofa-profile-card>`,
     })
     class TestComponent {
       value = value
     }
 
+    @NgModule({
+      declarations: [ TestComponent ],
+      imports: [ BofaProfileCardModule ]
+    })
+    class TestModule { }
+
+    TestBed.resetTestingModule()
+
+    await TestBed.configureTestingModule({
+      imports: [ TestModule ]
+    }).compileComponents()
+
     const fixture = TestBed.createComponent(TestComponent)
-    fixture.autoDetectChanges()
+    fixture.detectChanges()
 
     const getTextContent = (selector: string) => {
       return fixture.debugElement

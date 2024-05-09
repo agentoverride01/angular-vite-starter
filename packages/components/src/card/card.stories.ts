@@ -1,7 +1,7 @@
 import type { StoryObj } from '@storybook/angular'
-import type { StoryThemeObj } from '@zeke/storybook-utils'
+import type { StoryThemeObj } from '@bofa/storybook-utils'
 
-import { defineDefaultArgs } from '@zeke/storybook-utils'
+import { defineDefaultArgs } from '@bofa/storybook-utils'
 
 import { BofaCardComponent } from './card.component'
 

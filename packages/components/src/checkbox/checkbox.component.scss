@@ -3,7 +3,7 @@
     z-index: 0;
     position: relative;
     display: inline-block;
-    color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.87);
+    color: var(--checkbox-text-color);
     font-size: 16px;
     line-height: 1.5;
 
@@ -30,7 +30,8 @@
       border-radius: 50%;
       width: 40px;
       height: 40px;
-      background-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.6);
+      //background-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.6);
+      background-color: var(--checkbox-ripple-color);
       box-shadow: none;
       outline: none;
       opacity: 0;
@@ -51,7 +52,7 @@
       &:checked,
       &:indeterminate {
         //background-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
-        //background-color: red;
+        background-color: var(--checkbox-ripple-color);
       }
 
       &:disabled {
@@ -69,8 +70,9 @@
         display: inline-block;
         box-sizing: border-box;
         margin: 3px 11px 3px 1px;
-        border: solid 2px; /* Safari */
-        border-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.6);
+        border: solid var(--checkbox-border-line-width, 2px); /* Safari */
+        //border-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.6);
+        border-color: var(--checkbox-border-color);
         border-radius: 2px;
         width: 18px;
         height: 18px;
@@ -95,13 +97,19 @@
   
     > input:checked + span::before,
     > input:indeterminate + span::before {
-      border-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
-      background-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+      // border-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+      // background-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+
+      --_checkbox-bg-color: var(--checkbox-bg-color, 33, 150, 243);
+
+      border-color: var(--_checkbox-bg-color);
+      background-color: var(--_checkbox-bg-color);
     }
   
     > input:checked + span::after,
     > input:indeterminate + span::after {
-      border-color: rgb(var(--pure-material-onprimary-rgb, 255, 255, 255));
+      //border-color: rgb(var(--pure-material-onprimary-rgb, 255, 255, 255));
+      border-color: var(--checkbox-check-color);
     }
   
     > input:indeterminate + span::after {
@@ -131,6 +139,16 @@
     > input:indeterminate:disabled + span::before {
       border-color: transparent;
       background-color: currentColor;
+    }
+  }
+}
+
+:host([no-ripple]) {
+  .bofa-checkbox {
+    > input, 
+    > input:checked,
+    > input:indeterminate {
+      background-color: transparent;
     }
   }
 }

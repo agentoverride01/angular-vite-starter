@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing'
 
 import { BofaCardComponent } from './card.component'
 
-describe('Avatar', () => {
+describe('Card', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

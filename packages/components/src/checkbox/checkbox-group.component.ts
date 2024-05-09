@@ -1,17 +1,12 @@
-import { Component, AfterContentInit, OnDestroy, OnInit, model, output, effect, contentChildren, EffectRef } from '@angular/core'
+import type { SelectedChangedValue, Checkbox } from './types'
+
+import { Component, AfterContentInit, OnDestroy, Output, EventEmitter, Input, ContentChildren, QueryList } from '@angular/core'
 import { Subscription } from 'rxjs'
 
-import { BofaCheckboxEventService } from './checkbox-event.service'
 import { BofaCheckboxComponent } from './checkbox.component'
-import { Checkbox } from './checkbox-base'
-
-export type SelectedChangedValue = {
-  selected?: unknown[]
-} & Checkbox
 
 @Component({
   selector: 'bofa-checkbox-group',
-  standalone: true,
   template: `
     <section class="bofa-checkbox-group">
       <ng-content></ng-content>
@@ -21,34 +16,20 @@ export type SelectedChangedValue = {
     :host {
       .bofa-checkbox-group {
         display: var(--checkbox-group-display, grid);
+        width: var(--checkbox-group-width);
       }
     }
-  `,
-  providers: [ BofaCheckboxEventService ]
+  `
 })
-export class BofaCheckboxGroupComponent implements OnDestroy, OnInit, AfterContentInit {
-  #effects?: EffectRef
+export class BofaCheckboxGroupComponent implements OnDestroy, AfterContentInit {
   #disposables = new Subscription()
 
-  checkboxes = contentChildren(BofaCheckboxComponent)
-  
-  selectedChanged = output<SelectedChangedValue>()
-  selected = model<unknown[]>([])
-
-  constructor() {
-    this.#effects = effect(() => {
-      const selected = this.selected()
-      if (selected.length) {
-        console.log(selected)
-        this.checkboxes().forEach(checkbox => {
-          
-        })
-      }
-    })
-  }
+  @ContentChildren(BofaCheckboxComponent, { descendants: true }) checkboxes!: QueryList<BofaCheckboxComponent>
+  @Output() selectedChanged = new EventEmitter<SelectedChangedValue>()
+  @Input() selected: unknown[] = []
 
   #selectItem(value: unknown) {
-    return this.selected().findIndex(s => {
+    return this.selected.findIndex(s => {
       return (typeof s == 'object'
         ? JSON.stringify(s) === JSON.stringify(value || {})
         : s?.toString() === value?.toString())
@@ -61,14 +42,12 @@ export class BofaCheckboxGroupComponent implements OnDestroy, OnInit, AfterConte
     const selectIndex = this.#selectItem(value)
   
     if (checked && selectIndex === -1) {
-      this.selected.update(current => [ ...current, value ])
+      this.selected = [ ...this.selected, value ]
     }
 
     if (!checked && selectIndex !== -1) {
-      this.selected.update(current => {
-        const value = current.at(selectIndex)
-        return current.filter(c => c !== value)
-      })
+      const value = this.selected.at(selectIndex)
+      this.selected = this.selected.filter(c => c !== value)
     }
   }
 
@@ -76,24 +55,29 @@ export class BofaCheckboxGroupComponent implements OnDestroy, OnInit, AfterConte
     this.#updateSelected(checkbox)
     this.selectedChanged.emit({ 
       ...checkbox, 
-      selected: this.selected()
+      selected: this.selected
     })
   }
 
-  ngOnInit() { 
-
+  #updateCheckboxAfterContentInit(checkbox: Checkbox) {
+    const index = this.#selectItem(checkbox.value)
+    if (index !== -1) {
+      checkbox.checked = true  
+    }
+    this.#updateSelected(checkbox)
   }
 
   ngAfterContentInit() {
-    const next = this.#onCheckboxNext.bind(this)
-    this.checkboxes().forEach(checkbox => {      
+    const next = this.#onCheckboxNext.bind(this)    
+    this.checkboxes.forEach(checkbox => {
       const dispose = checkbox.changed.subscribe(next)
-      this.#disposables.add(dispose)
+      this.#disposables.add(dispose)      
+      checkbox.value && this.#updateCheckboxAfterContentInit(checkbox)
     })
+    this.selectedChanged.emit({ selected: this.selected })
   }
 
   ngOnDestroy() {
     this.#disposables.unsubscribe()
-    this.#effects?.destroy()
   }
 }

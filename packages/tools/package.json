@@ -1,5 +1,5 @@
 {
-  "name": "@zeke/tools",
+  "name": "@bofa/tools",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -13,18 +13,18 @@
   "dependencies": {
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
-    "@types/node": "^20.12.8",
-    "@vitest/coverage-v8": "1.5.3",
-    "@vitest/ui": "^1.5.3",
-    "eslint": "^9.1.1",
-    "happy-dom": "^14.7.1",
+    "@types/node": "^20.12.10",
+    "@vitest/coverage-v8": "1.6.0",
+    "@vitest/ui": "^1.6.0",
+    "eslint": "^9.2.0",
+    "happy-dom": "^14.10.1",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
-    "sass": "^1.76.0",
+    "sass": "^1.77.0",
     "sirv-cli": "^2.0.2",
     "typescript": "^5.4.5",
     "tslib": "^2.6.2",
-    "vite": "^5.2.10",
-    "vitest": "^1.5.3"
+    "vite": "^5.2.11",
+    "vitest": "^1.6.0"
   }
 }

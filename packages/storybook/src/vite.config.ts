@@ -3,7 +3,7 @@ import { join } from 'node:path'
 
 import angular from '@analogjs/vite-plugin-angular'
 
-import { viteTsPaths } from '../../tools/src/tools'
+import { viteTsPaths, getComponentPaths } from '../../tools/src/tools'
 
 export default defineConfig(({ mode }) => ({
   publicDir: 'src/assets',
@@ -12,7 +12,10 @@ export default defineConfig(({ mode }) => ({
   },
   resolve: {
     mainFields: ['module'],
-    alias: viteTsPaths()
+    alias: Object.assign({}, 
+      viteTsPaths(), 
+      getComponentPaths()
+    )
   },
   plugins: [
     {

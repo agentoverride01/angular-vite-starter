@@ -1,4 +1,4 @@
-import '@zeke/theme';
+import '@bofa/theme'
 
 import type { Preview } from '@storybook/angular'
 

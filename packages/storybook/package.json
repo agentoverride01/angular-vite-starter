@@ -1,5 +1,5 @@
 {
-  "name": "@zeke/storybook",
+  "name": "@bofa/storybook",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,14 +11,14 @@
   "author": "Arjay Elbore <aelbore.sg@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@storybook/addon-essentials": "^8.0.9",
-    "@storybook/addon-interactions": "^8.0.9",
-    "@storybook/addon-links": "^8.0.9",
-    "@storybook/addon-a11y": "^8.0.9",
-    "@storybook/angular": "^8.0.9",
-    "@storybook/blocks": "^8.0.9",
-    "@storybook/builder-vite": "^8.0.9",
-    "@storybook/test": "^8.0.9",
-    "storybook": "^8.0.9"
+    "@storybook/addon-essentials": "^8.0.10",
+    "@storybook/addon-interactions": "^8.0.10",
+    "@storybook/addon-links": "^8.0.10",
+    "@storybook/addon-a11y": "^8.0.10",
+    "@storybook/angular": "^8.0.10",
+    "@storybook/blocks": "^8.0.10",
+    "@storybook/builder-vite": "^8.0.10",
+    "@storybook/test": "^8.0.10",
+    "storybook": "^8.0.10"
   }
 }

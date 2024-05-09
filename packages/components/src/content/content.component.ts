@@ -29,6 +29,7 @@ import { Component } from '@angular/core'
           row-gap: var(--content-section-row-gap);
           grid-template-columns: var(--content-section-grid-columns);
           column-gap: var(--content-section-column-gap);
+          align-items: var(--content-section-align-items);
         }
 
         > footer {
